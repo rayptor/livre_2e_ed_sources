@@ -1,4 +1,4 @@
-class Entier():
+class BinHex():
     masque8 = 0xFF
     masque16 = 0xFFFF
     masque32 = 0xFFFFFFFF
@@ -37,7 +37,7 @@ class Entier():
         return f"{fmt}{val}"
 
 
-    def permutation(self, longueur: int = None) -> "Entier":
+    def permutation(self, longueur: int = None) -> "BinHex":
         if longueur not in self.longueurs or longueur is None:
             raise TypeError(f"'{longueur}' non gérée.")
         
@@ -58,15 +58,15 @@ class Entier():
         return self
 
 
-    def mise_a_un_bit(self, bit: int) -> "Entier":
+    def mise_a_un_bit(self, bit: int) -> "BinHex":
         self._x |= (1 << bit)
         return self
 
-    def mise_a_zero_bit(self, bit: int) -> "Entier":
+    def mise_a_zero_bit(self, bit: int) -> "BinHex":
         self._x &= ~(1 << bit)
         return self
 
-    def inverser_bit(self, bit: int) -> "Entier":
+    def inverser_bit(self, bit: int) -> "BinHex":
         self._x ^= (1 << bit)
         return self
 
@@ -81,10 +81,10 @@ class Entier():
 
 
 if __name__ == "__main__":
-    val8b = Entier(0b11110000)
-    val16b = Entier(0b1111111100000000)
-    val32h = Entier(0xFFFF0000)
-    val64h = Entier(0xF50AF38B24CC9FFF)
+    val8b = BinHex(0b11110000)
+    val16b = BinHex(0xFACE)
+    val32h = BinHex(0x00010000)
+    val64h = BinHex(0x0123456789ABCDEF)
 
     separateur = "-" * 60
     print(f"Valeur 8 bits (bin) : {val8b.afficher("bin", 8)}")
@@ -97,12 +97,6 @@ if __name__ == "__main__":
     print(f"Valeur 32 bits (hex) : {val32h.afficher("hex", 32)}")
     print(f"Valeur 64 bits (hex) : {val64h.afficher("hex", 64)}")
     print(separateur)
-    print(f"Mise à un du bit 2 : {val8b.mise_a_un_bit(2).afficher("bin", 8)}")
-    print(f"Mise à zéro du bit 13 : {val16b.mise_a_zero_bit(13).afficher("bin", 16)}")
-    print(f"Inversion du bit 4 : {val32h.inverser_bit(4).afficher("bin", 32)}")
-    print(f"29e bit de val32h à 1 ? {val32h.tester_bit(29)}")
-    print(f"Inversion du bit 59 : {val64h.inverser_bit(59).afficher("bin", 64)}")
-    print(separateur)
     print(f"Swap 8 bits : {val8b.permutation(8).afficher("bin", 8)}")
     print(f"Swap 16 bits : {val16b.permutation(16).afficher("bin", 16)}")
     print(f"Swap 32 bits : {val32h.permutation(32).afficher("bin", 32)}")
@@ -113,17 +107,19 @@ if __name__ == "__main__":
     print(f"Valeur 32 bits (hex) : {val32h.afficher("hex", 32)}")
     print(f"Valeur 64 bits (hex) : {val64h.afficher("hex", 64)}")
     print(separateur)
-    print(f"Est-ce que 'val8b' et -14 sont de même signe ? {val8b.meme_signe(-14)}")
-    print(f"Est-ce que 'val16b' est une puissance de 2 ? {val16b.puissance_deux()}")
-    print(f"Est-ce que 'val32h' et 1023409 sont de même signe ? {val32h.meme_signe(1023409)}")
-    print(f"Est-ce que 'val64h' est une puissance de 2 ? {val64h.puissance_deux()}")
+    print(f"Mise à zéro du bit 2 et mise : {val8b.mise_a_zero_bit(2).afficher("bin", 8)}")
+    print(f"Mise à un du bit 7 : {val8b.mise_a_un_bit(7).afficher("bin", 8)}")
+    print(f"31e bit de val32h à 1 ? {val32h.tester_bit(31)}")
+    print(f"Inversion du bit 62 : {val64h.inverser_bit(62).afficher("bin", 64)}")
+    print(separateur)
+    print(f"Est-ce que 'val16b' est une puissance de 2 ? {val32h.puissance_deux()}")
+    print(f"Est-ce que 'val32h' et -1023409 sont de même signe ? {val32h.meme_signe(1023409)}")
 
 
-    # si besoin d'afficher en base 10
-    import ast
-    print(ast.literal_eval(val8b.afficher("hex", 8)))
-    print(ast.literal_eval(val16b.afficher("hex", 16)))
-    print(ast.literal_eval(val32h.afficher("hex", 32)))
-    print(ast.literal_eval(val64h.afficher("hex", 64)))
+    # si besoin d'afficher en base 10 (décimale)
+    # import ast
+    # print(ast.literal_eval(val8b.afficher("hex", 8)))
+    # print(ast.literal_eval(val16b.afficher("hex", 16)))
+    # print(ast.literal_eval(val32h.afficher("hex", 32)))
+    # print(ast.literal_eval(val64h.afficher("hex", 64)))
 
-    
