@@ -6,7 +6,7 @@ from pprint import pprint
 from collections import OrderedDict
 
 ## emplacement du fichier
-fichierJson = "/Users/philippepeter/Desktop/Python/etna_data.json"
+fichierJson = "/Users/pp/Desktop/Python/etna_data.json"
 
 ## lecture du fichier json pour en récupérer le dictionnaire et l'afficher
 with open(fichierJson, "r", encoding="utf-8") as fichier:
