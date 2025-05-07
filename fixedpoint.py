@@ -4,9 +4,6 @@ def f(x):
     return x**3 - x - 1 #2 * np.exp(-x)#np.sin(x) - np.cos(x) + 1
 
 def picard_iteration(f, x0, tol = np.finfo(np.float128).eps, max_iter=100):
-    """
-    Picard iteration: x_{n+1} = g(x_n).
-    """
     x = x0
     for i in range(max_iter):
         x_new = f(x)
@@ -18,9 +15,6 @@ def picard_iteration(f, x0, tol = np.finfo(np.float128).eps, max_iter=100):
     return x, max_iter
 
 def mann_iteration(f, x0, tol = np.finfo(np.float128).eps, max_iter=100, alpha=0.5):
-    """
-    Mann iteration: x_{n+1} = (1 - alpha) * x_n + alpha * g(x_n).
-    """
     x = x0
     for i in range(max_iter):
         x_new = (1 - alpha) * x + alpha * f(x)
@@ -32,9 +26,6 @@ def mann_iteration(f, x0, tol = np.finfo(np.float128).eps, max_iter=100, alpha=0
     return x, max_iter
 
 def ishikawa_iteration(f, x0, tol = np.finfo(np.float128).eps, max_iter=100, alpha=0.5, beta=0.5):
-    """
-    Ishikawa iteration: x_{n+1} = (1 - alpha) * x_n + alpha * g((1 - beta) * x_n + beta * g(x_n)).
-    """
     x = x0
     for i in range(max_iter):
         intermediate = (1 - beta) * x + beta * f(x)
